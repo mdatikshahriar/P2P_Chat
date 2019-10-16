@@ -76,25 +76,6 @@ public class ChatFragment extends Fragment {
             }
         });
 
-        new Thread() {
-            @Override
-            public void run() {
-                int size = messageArray.size();
-                while (true){
-                    try {
-                        if(size<messageArray.size()){
-                            Adapter mMessageAdapter = new Adapter(messageArray);
-                            mMessageRecyclerView.setAdapter(mMessageAdapter);
-                            size=messageArray.size();
-                        }
-                        sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
-
         return root;
     }
 }
