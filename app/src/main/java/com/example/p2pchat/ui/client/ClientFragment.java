@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.p2pchat.MainActivity;
 import com.example.p2pchat.Networking.Network;
-import com.example.p2pchat.Networking.NetworkObjects;
 import com.example.p2pchat.R;
 
 public class ClientFragment extends Fragment {
@@ -22,7 +21,7 @@ public class ClientFragment extends Fragment {
     private EditText clientIPAddress, clientPortNumber;
     private Button connectButton, clientUpdateButton;
 
-    Network network;
+    private Network network;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,8 +45,8 @@ public class ClientFragment extends Fragment {
                 MainActivity.networkObjects.setClientIPAddress(clientIPAddress.getText().toString());
                 MainActivity.networkObjects.setClientPortNumber(Integer.parseInt(clientPortNumber.getText().toString()));
 
-                clientIPAddress.setText(clientIPAddress.getText());
-                clientPortNumber.setText(clientPortNumber.getText());
+                clientIPAddress.setText("");
+                clientPortNumber.setText("");
             }
         });
 

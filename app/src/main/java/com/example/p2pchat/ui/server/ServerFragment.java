@@ -13,7 +13,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.p2pchat.MainActivity;
 import com.example.p2pchat.Networking.Network;
-import com.example.p2pchat.Networking.NetworkObjects;
 import com.example.p2pchat.R;
 
 public class ServerFragment extends Fragment {
@@ -36,13 +35,13 @@ public class ServerFragment extends Fragment {
         startServerButton = root.findViewById(R.id.server_start_server_button);
         serverUpdateButton = root.findViewById(R.id.server_update_button);
 
-        serverPortNumber.setText(String.valueOf(MainActivity.networkObjects.getClientPortNumber()));
+        serverPortNumber.setText(String.valueOf(MainActivity.networkObjects.getServerPortNumber()));
 
         serverUpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MainActivity.networkObjects.setServerPortNumber(Integer.parseInt(serverPortNumber.getText().toString()));
-                serverPortNumber.setText(serverPortNumber.getText());
+                serverPortNumber.setText("");
             }
         });
 

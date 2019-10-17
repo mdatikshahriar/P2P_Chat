@@ -7,10 +7,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
@@ -40,7 +38,7 @@ public class HomeFragment extends Fragment {
         serverIP = root.findViewById(R.id.home_server_ip);
         serverPort = root.findViewById(R.id.home_server_port);
         clientIP = root.findViewById(R.id.home_client_ip);
-        clientPort = root.findViewById(R.id.home_server_port);
+        clientPort = root.findViewById(R.id.home_client_port);
 
         serverIP.setText(MainActivity.networkObjects.getServerIPAddress());
         serverPort.setText(String.valueOf(MainActivity.networkObjects.getServerPortNumber()));

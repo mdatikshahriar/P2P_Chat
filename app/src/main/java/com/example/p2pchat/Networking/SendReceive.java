@@ -1,27 +1,18 @@
 package com.example.p2pchat.Networking;
 
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.util.Log;
 
 import com.example.p2pchat.MainActivity;
-import com.example.p2pchat.ui.chat.Adapter;
-import com.example.p2pchat.ui.chat.ChatFragment;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-import java.util.Base64;
 
 public class SendReceive extends Thread{
     private Socket socket;
     private InputStream inputStream;
     private OutputStream outputStream;
-
-    public static final int MESSAGE_READ=1;
-
 
     public SendReceive(Socket skt)
     {
@@ -36,26 +27,16 @@ public class SendReceive extends Thread{
 
     @Override
     public void run() {
-
-        Log.d("tag", "Send receive started");
-
-        byte[] buffer=new byte[1024];
+        byte[] buffer=new byte[1048576];
         int bytes;
-
-        Log.d("tag", "Handler passed");
 
         while (socket!=null)
         {
-            Log.d("tag", "Receiving");
-
             try {
                 bytes=inputStream.read(buffer);
                 if(bytes>0)
                 {
-                    String msg = new String(buffer, "UTF-8");
-                    Messages message = new Messages(msg, "received");
-                    ChatFragment.messageArray.add(message);
-                    Log.d("tag", "Inside Receiving. Message is: " + msg);
+                    MainActivity.handler.obtainMessage(MainActivity.MESSAGE_READ,bytes,-1,buffer).sendToTarget();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -67,7 +48,7 @@ public class SendReceive extends Thread{
         new Thread(new Runnable(){
             @Override
             public void run() {
-                Log.d("tag", "Sending");
+                Log.d("sender", "Sending message");
                 try {
                     outputStream.write(bytes);
                 } catch (IOException e) {

@@ -2,10 +2,11 @@ package com.example.p2pchat.Networking;
 
 public class Messages {
 
-    String message, type;
+    private String message, type, time;
 
-    public Messages(String message, String type) {
+    public Messages(String message, String time, String type) {
         this.message = message;
+        this.time = time;
         this.type = type;
     }
 
@@ -23,5 +24,13 @@ public class Messages {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

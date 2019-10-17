@@ -4,8 +4,9 @@ import java.net.Socket;
 
 public class NetworkObjects {
 
-    private String serverIPAddress ,clientIPAddress;
+    private String serverIPAddress ,clientIPAddress, myName, senderName;
     private int serverPortNumber, clientPortNumber;
+    private boolean isConnected = false;
 
     private Socket serverSocket = null, clientSocket = null;
     private SendReceive sendReceive = null;
@@ -15,6 +16,8 @@ public class NetworkObjects {
         this.clientIPAddress = clientIPAddress;
         this.serverPortNumber = serverPortNumber;
         this.clientPortNumber = clientPortNumber;
+        this.myName = "";
+        this.senderName = "";
     }
 
     public String getClientIPAddress() {
@@ -71,5 +74,29 @@ public class NetworkObjects {
 
     public void setServerIPAddress(String serverIPAddress) {
         this.serverIPAddress = serverIPAddress;
+    }
+
+    public boolean isConnected() {
+        return isConnected;
+    }
+
+    public void setConnected(boolean connected) {
+        isConnected = connected;
+    }
+
+    public String getMyName() {
+        return myName;
+    }
+
+    public void setMyName(String myName) {
+        this.myName = myName;
+    }
+
+    public String getSenderName() {
+        return senderName;
+    }
+
+    public void setSenderName(String senderName) {
+        this.senderName = senderName;
     }
 }

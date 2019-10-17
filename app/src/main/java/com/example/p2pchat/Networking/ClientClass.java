@@ -1,5 +1,7 @@
 package com.example.p2pchat.Networking;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -9,12 +11,12 @@ import java.io.IOException;
 import java.net.Socket;
 
 public class ClientClass extends Thread{
-    Socket socket;
+    private Socket socket;
+    private String ip;
 
-    String ip;
-    int port;
+    private int port;
 
-    SendReceive sendReceive;
+    private SendReceive sendReceive;
 
     public ClientClass(String ip, int port)
     {
@@ -29,13 +31,26 @@ public class ClientClass extends Thread{
         try {
             socket=new Socket(MainActivity.networkObjects.getClientIPAddress(), MainActivity.networkObjects.getClientPortNumber());
             MainActivity.networkObjects.setClientSocket(socket);
-            Log.d("tag", "Client is connected to server");
+            new Handler(Looper.getMainLooper()).post(new Runnable(){
+                @Override
+                public void run() {
+                    Toast.makeText(MainActivity.context, "Successfully connected to server", Toast.LENGTH_LONG).show();
+                }
+            });
+            Log.d("tag", "Successfully connected to server");
+            MainActivity.networkObjects.setConnected(true);
             sendReceive=new SendReceive(socket);
             sendReceive.start();
             MainActivity.networkObjects.setSendReceive(sendReceive);
         } catch (IOException e) {
             e.printStackTrace();
-            String error = "Error: "+e;
+            final String error = "Error: "+e;
+            new Handler(Looper.getMainLooper()).post(new Runnable(){
+                @Override
+                public void run() {
+                    Toast.makeText(MainActivity.context, error, Toast.LENGTH_LONG).show();
+                }
+            });
             Log.d("tag", error);
         }
     }

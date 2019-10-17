@@ -2,39 +2,39 @@ package com.example.p2pchat.ui.chat;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.p2pchat.MainActivity;
 import com.example.p2pchat.Networking.Messages;
-import com.example.p2pchat.Networking.NetworkObjects;
-import com.example.p2pchat.Networking.SendReceive;
 import com.example.p2pchat.R;
 
-import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ChatFragment extends Fragment {
 
-    static RecyclerView mMessageRecyclerView;
+    public static RecyclerView mMessageRecyclerView;
     private RecyclerView.Adapter mMessageAdapter;
     private RecyclerView.LayoutManager mlayoutManager;
     private Button sendButton;
     private EditText myMessage;
     public static ArrayList<Messages> messageArray;
+    private String myName;
 
     private ChatViewModel chatViewModel;
 
@@ -46,6 +46,7 @@ public class ChatFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_chat, container, false);
         context = container.getContext();
+        myName = MainActivity.networkObjects.getMyName();
 
         messageArray = new ArrayList<>();
 
@@ -66,13 +67,31 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Messages message;
-                message = new Messages(myMessage.getText().toString(), "sent");
-                messageArray.add(message);
+                String currentTime = new SimpleDateFormat("h:mm a", Locale.getDefault()).format(new Date());
+                String messageString = myMessage.getText().toString();
 
-                Adapter mMessageAdapter = new Adapter(messageArray);
-                mMessageRecyclerView.setAdapter(mMessageAdapter);
+                if(!messageString.isEmpty()){
+                    if(MainActivity.networkObjects.isConnected()){
+                        message = new Messages(messageString, currentTime, "sent");
+                        messageArray.add(message);
 
-                MainActivity.networkObjects.getSendReceive().write(myMessage.getText().toString().getBytes());
+                        Adapter mMessageAdapter = new Adapter(messageArray);
+                        mMessageRecyclerView.setAdapter(mMessageAdapter);
+
+                        String tosent = myName + "~" + currentTime + "~" + messageString;
+                        MainActivity.networkObjects.getSendReceive().write(tosent.getBytes());
+
+                        myMessage.setText("");
+                    }
+                    else {
+                        new Handler(Looper.getMainLooper()).post(new Runnable(){
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.context, "Please establish a connection first.", Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }
+                }
             }
         });
 

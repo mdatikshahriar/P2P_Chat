@@ -1,11 +1,9 @@
 package com.example.p2pchat.ui.chat;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -74,19 +72,22 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             TextView timeText = holder2.timeText;
             TextView nameText = holder2.nameText;
             messageText.setText(message.getMessage());
-            Log.d("tag", message.getMessage());
-            String time = "12:00";
-            timeText.setText(time);
-            nameText.setText(MainActivity.networkObjects.getClientIPAddress());
+            timeText.setText(message.getTime());
+
+            String name = MainActivity.networkObjects.getSenderName();
+            if(name.isEmpty()){
+                nameText.setText(MainActivity.networkObjects.getClientIPAddress());
+            }
+            else {
+                nameText.setText(name);
+            }
         }
         else{
             SentMessageHolder holder1 = (SentMessageHolder) holder;
             TextView messageText = holder1.messageText;
             TextView timeText = holder1.timeText;
             messageText.setText(message.getMessage());
-            Log.d("tag", message.getMessage());
-            String time = "12:00";
-            timeText.setText(time);
+            timeText.setText(message.getTime());
         }
     }
 

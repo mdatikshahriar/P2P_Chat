@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -14,7 +13,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginBottom="450dp"
         android:padding="5dp"
-        android:text="Update Client IP Address and Port..."
+        android:text="Update Client IP Address and Port"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="30sp"
@@ -51,10 +50,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="40dp"
             android:layout_weight="1"
-            android:background="#D0ECE7"
+            android:background="@drawable/rounded_rectangle_white"
             android:ems="5"
             android:inputType="textPersonName"
             android:padding="10dp"
+            android:textColor="#000000"
             android:text="192.168.0.1"
             android:textSize="23sp" />
     </LinearLayout>
@@ -86,10 +86,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="80dp"
             android:layout_weight="1"
-            android:background="#D0ECE7"
+            android:background="@drawable/rounded_rectangle_white"
             android:ems="5"
             android:inputType="textPersonName"
             android:padding="10dp"
+            android:textColor="#000000"
             android:text="6666"
             android:textSize="23sp" />
     </LinearLayout>
@@ -102,7 +103,7 @@
         android:layout_marginTop="100dp"
         android:layout_marginEnd="140dp"
         android:layout_marginBottom="80dp"
-        android:background="#45B39D"
+        android:background="@drawable/rounded_rectangle_green"
         android:padding="18dp"
         android:text="Update"
         android:textColor="#ffffff"
@@ -120,7 +121,7 @@
         android:layout_marginTop="450dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="100dp"
-        android:background="#45B39D"
+        android:background="@drawable/rounded_rectangle_green"
         android:padding="20dp"
         android:text="Connect Client"
         android:textColor="#ffffff"

@@ -4,17 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.p2pchat.MainActivity;
 import com.example.p2pchat.R;
 
 public class SettingsFragment extends Fragment {
+
+    private EditText nameEditText;
+    private Button nameUpdateButton;
 
     private SettingsViewModel settingsViewModel;
 
@@ -23,13 +26,25 @@ public class SettingsFragment extends Fragment {
         settingsViewModel =
                 ViewModelProviders.of(this).get(SettingsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        final TextView textView = root.findViewById(R.id.text_share);
-        settingsViewModel.getText().observe(this, new Observer<String>() {
+
+        nameEditText = root.findViewById(R.id.settings_name_editText);
+        nameUpdateButton = root.findViewById(R.id.settings_name_update_button);
+
+        nameEditText.setText(MainActivity.networkObjects.getMyName());
+
+        nameUpdateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onClick(View v) {
+                String name = nameEditText.getText().toString();
+
+                if(!name.isEmpty()){
+                    MainActivity.networkObjects.setMyName(name);
+                    MainActivity.headerName.setText(name);
+                    nameEditText.setText("");
+                }
             }
         });
+
         return root;
     }
 }
