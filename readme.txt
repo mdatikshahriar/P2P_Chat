@@ -2,7 +2,7 @@ Project Title: P2P Chat
 Course: CSE 362, Computer Networking Lab
 Submitted by: Md Atik Shahriar (2016331027), Md Nurul Afsar Mahmud (2016331046)
 
-This is a peer to peer messaging app which send and receive message using Socket of server type and client type. This app can connect only two peer at a time. While connected peers can send and receive message in real time. But both peers must be under same network.
+This is a peer to peer messaging app which send and receive message using Socket of server type and client type. This app can connect only two peer at a time. While connected, peers can send and receive message in real time. But both peers must be under same network.
 
 
 <<<<<<Features>>>>>>
