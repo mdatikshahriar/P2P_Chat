@@ -6,18 +6,20 @@ public class NetworkObjects {
 
     private String serverIPAddress ,clientIPAddress, myName, senderName;
     private int serverPortNumber, clientPortNumber;
-    private boolean isConnected = false;
+    private boolean isConnected, isWifiOpen;
 
-    private Socket serverSocket = null, clientSocket = null;
+    private Socket socket = null;
     private SendReceive sendReceive = null;
 
-    public NetworkObjects(String serverIPAddress, String clientIPAddress, int serverPortNumber, int clientPortNumber) {
+    public NetworkObjects(String serverIPAddress, String clientIPAddress, int serverPortNumber, int clientPortNumber, String myName) {
         this.serverIPAddress = serverIPAddress;
         this.clientIPAddress = clientIPAddress;
         this.serverPortNumber = serverPortNumber;
         this.clientPortNumber = clientPortNumber;
-        this.myName = "";
+        this.myName = myName;
         this.senderName = "";
+        this.isConnected = false;
+        this.isWifiOpen = true;
     }
 
     public String getClientIPAddress() {
@@ -44,20 +46,12 @@ public class NetworkObjects {
         this.clientPortNumber = clientPortNumber;
     }
 
-    public Socket getServerSocket() {
-        return serverSocket;
+    public Socket getSocket() {
+        return socket;
     }
 
-    public void setServerSocket(Socket serverSocket) {
-        this.serverSocket = serverSocket;
-    }
-
-    public Socket getClientSocket() {
-        return clientSocket;
-    }
-
-    public void setClientSocket(Socket clientSocket) {
-        this.clientSocket = clientSocket;
+    public void setSocket(Socket socket) {
+        this.socket = socket;
     }
 
     public SendReceive getSendReceive() {
@@ -98,5 +92,13 @@ public class NetworkObjects {
 
     public void setSenderName(String senderName) {
         this.senderName = senderName;
+    }
+
+    public boolean isWifiOpen() {
+        return isWifiOpen;
+    }
+
+    public void setWifiOpen(boolean wifiOpen) {
+        isWifiOpen = wifiOpen;
     }
 }

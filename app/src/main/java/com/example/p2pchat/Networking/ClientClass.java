@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.p2pchat.MainActivity;
+import com.example.p2pchat.ui.HomeFragment;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -30,14 +31,14 @@ public class ClientClass extends Thread{
     public void run() {
         try {
             socket=new Socket(MainActivity.networkObjects.getClientIPAddress(), MainActivity.networkObjects.getClientPortNumber());
-            MainActivity.networkObjects.setClientSocket(socket);
             new Handler(Looper.getMainLooper()).post(new Runnable(){
                 @Override
                 public void run() {
-                    Toast.makeText(MainActivity.context, "Successfully connected to server", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.context, "Successfully connected", Toast.LENGTH_LONG).show();
+                    HomeFragment.status.setText("Connected");
                 }
             });
-            Log.d("tag", "Successfully connected to server");
+            Log.d("tag", "Successfully connected");
             MainActivity.networkObjects.setConnected(true);
             sendReceive=new SendReceive(socket);
             sendReceive.start();

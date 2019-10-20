@@ -75,7 +75,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             timeText.setText(message.getTime());
 
             String name = MainActivity.networkObjects.getSenderName();
-            if(name.isEmpty()){
+            if(name.equals(MainActivity.SAVED_NAME_DEFAULT_VALUE)){
                 nameText.setText(MainActivity.networkObjects.getClientIPAddress());
             }
             else {

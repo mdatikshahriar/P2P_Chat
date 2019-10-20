@@ -20,7 +20,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Update Your Name."
+                android:text="Update Your Name"
                 android:textSize="18sp"
                 android:layout_marginTop="15dp"
                 android:textColor="#ffffff"/>
@@ -53,5 +53,49 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Update Your Port"
+                android:textSize="18sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#ffffff"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/settings_server_port_editText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:ems="10"
+                    android:hint="Enter your port number"
+                    android:inputType="textPersonName"
+                    android:textSize="15sp"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:id="@+id/settings_server_port_update_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Update"
+                    android:textColor="#000000"
+                    android:background="@drawable/rounded_rectangle_white"
+                    android:layout_marginStart="20dp"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
